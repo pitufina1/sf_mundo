@@ -36,6 +36,12 @@ class Localidad
      */
     private $cp;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Provincia", inversedBy="localidades")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $provincia;
+
     public function getId()
     {
         return $this->id;
@@ -85,6 +91,18 @@ class Localidad
     public function setCp(string $cp): self
     {
         $this->cp = $cp;
+
+        return $this;
+    }
+
+    public function getProvincia(): ?Provincia
+    {
+        return $this->provincia;
+    }
+
+    public function setProvincia(?Provincia $provincia): self
+    {
+        $this->provincia = $provincia;
 
         return $this;
     }

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1> Listado de Paises </h1>
+<ul>
+	{% for pais in paises %}
+	<li> 
+		{{ pais.nombre }} - 
+		{{ pais.continente }}
+	</li>
+	{% endfor %}
+</ul>
+<a href="{{ path('pais_nuevo') }}"> Añadir Pais </a>
+
+{% endblock %}

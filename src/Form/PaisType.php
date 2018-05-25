@@ -2,24 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Localidad;
-use App\Entity\Provincia;
+use App\Entity\Pais;
+use App\Entity\Region;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class LocalidadType extends AbstractType
+
+class PaisType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('nombre')
-            ->add('area')
-            ->add('habitantes')
-            ->add('cp')
-            ->add('provincia')
+            ->add('continente')
+            ->add('regiones',EntityType::class,array(
+                'class' => Region::class,
+                'choice_label' => function ($region) {
+                    return $region->getNombre();
+            }))
             ->add('Guardar', SubmitType::class, array('attr' => array('class' => 'btn btn-success'),
             ))
         ;
@@ -28,7 +31,7 @@ class LocalidadType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Localidad::class,
+            'data_class' => Pais::class,
         ]);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Localidad;
-use App\Form\LocalidadType;
+use App\Entity\Region;
+use App\Form\RegionType;
 use App\Entity\Provincia;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,66 +14,66 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
-	   /**
-     * @Route("/localidad")
+	/**
+     * @Route("/region")
      */
-class LocalidadController extends Controller
+class RegionController extends Controller
 {
     /**
-     * @Route("/nuevo", name="localidad_nuevo")
+     * @Route("/nuevo", name="region_nuevo")
      */
     public function index(Request $request)
     {
-    	$localidad = new Localidad ();
-    	$formu = $this->createForm(LocalidadType::class, $localidad);
+    	$region = new Region ();
+    	$formu = $this->createForm(RegionType::class, $region);
     	$formu->handleRequest($request);
 
     	if ($formu->isSubmitted()) {
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($localidad);
+            $em->persist($region);
             $em->flush();
             
-            return $this->redirectToRoute('localidad_lista');
+            return $this->redirectToRoute('region_lista');
       	}
 
-            return $this->render('localidad/nuevo.html.twig', [
+            return $this->render('region/nuevo.html.twig', [
             'formulario' => $formu ->createView(),
         ]);
     }
 
     /**
-     * @Route("/lista", name="localidad_lista")
+     * @Route("/lista", name="region_lista")
      */
     public function listado()
     {
-        $repo = $this->getDoctrine()->getRepository(Localidad::class);
+        $repo = $this->getDoctrine()->getRepository(Region::class);
         
-        $localidades = $repo->findAll();
+        $regiones = $repo->findAll();
         
-            return $this->render ('localidad/index.html.twig', [
-            'localidades' =>  $localidades,
+            return $this->render ('region/index.html.twig', [
+            'regiones' =>  $regiones,
         ]);
     }
 
     /**
-     * @Route("/detalle/{id}", name="localidad_detalle", requirements={"id"="\d+"})
+     * @Route("/detalle/{id}", name="region_detalle", requirements={"id"="\d+"})
      */
     public function detalle($id)
     {
-        $repo = $this->getDoctrine()->getRepository(Localidad::class);
+        $repo = $this->getDoctrine()->getRepository(Region::class);
         
-        $localidad = $repo->find($id);
+        $region = $repo->find($id);
                    
-            return $this->render ('localidad/detalle.html.twig', [
-            'localidad' =>  $localidad,
+            return $this->render ('region/detalle.html.twig', [
+            'region' =>  $region,
         ]);
     }
 
     /**
-     * @Route("/jsonlist", name="localidad_jsonlist")
+     * @Route("/jsonlist", name="region_jsonlist")
      */
-    public function jsonLocalidades()
+    public function jsonRegiones()
     {
 
         $encoder = new JsonEncoder();
@@ -87,11 +87,11 @@ class LocalidadController extends Controller
 
         $serializer = new Serializer(array($normalizer), array($encoder));
 
-        $repo = $this->getDoctrine()->getRepository(Localidad::class);
-        $localidades = $repo->findAll();
-        $jsonLocalidades = $serializer->serialize($localidades, 'json');        
+        $repo = $this->getDoctrine()->getRepository(Region::class);
+        $regiones = $repo->findAll();
+        $jsonRegiones = $serializer->serialize($regiones, 'json');        
 
-        $respuesta = new Response($jsonLocalidades);
+        $respuesta = new Response($jsonRegiones);
 
         return $respuesta;
     }

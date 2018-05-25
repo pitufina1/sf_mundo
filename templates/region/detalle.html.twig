@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1> Listado de Regiones </h1>
+
+	<li> 	
+		{{ region.nombre }} - 
+		{{ region.idioma }}
+	</li>
+
+
+	<ul>
+		{% for provincia in region.provincias %}
+		<li> 
+			{{ provincia.nombre }} 
+		</li>
+
+		{% endfor %}
+	</ul>
+
+<a href="{{ path('region_detalle',{'id': 1}) }}"> Añadir País </a>
+
+{{ dump(region) }}
+
+{% endblock %}
