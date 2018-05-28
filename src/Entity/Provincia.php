@@ -99,4 +99,21 @@ class Provincia
 
         return $this;
     }
+
+
+     public function getArea(): ?float
+    {
+        foreach ($this->localidades as $localidad){
+            $suma = $suma + $localidad->getArea();
+        }
+            return $suma;
+    }
+    
+     public function getHabitantes(): ?int
+    {
+        foreach ($this->localidades as $localidad){
+            $suma = $suma + $localidad->getHabitantes();
+            }
+            return $suma;
+    }
 }

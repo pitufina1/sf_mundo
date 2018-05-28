@@ -119,4 +119,21 @@ class Pais
 
         return $this;
     }
+
+
+     public function getArea(): ?float
+    {
+        foreach ($this->regiones as $region){
+            $suma = $suma + $region->getArea();
+        }
+            return $suma;
+    }
+    
+     public function getHabitantes(): ?int
+    {
+        foreach ($this->regiones as $region){
+            $suma = $suma + $region->getHabitantes();
+            }
+            return $suma;
+    }
 }

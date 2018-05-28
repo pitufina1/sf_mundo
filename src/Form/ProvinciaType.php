@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Provincia;
 use App\Entity\Localidad;
+use App\Entity\Region;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,6 +18,12 @@ class ProvinciaType extends AbstractType
     {
         $builder
             ->add('nombre')
+
+            ->add('region',EntityType::class,array(
+                'class' => Region::class,
+                'choice_label' => function ($region) {
+                    return $region->getNombre();
+            }))
             ->add('Guardar', SubmitType::class, array('attr' => array('class' => 'btn btn-success'),
             ))
         ;

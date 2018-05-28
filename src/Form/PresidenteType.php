@@ -20,7 +20,7 @@ class PresidenteType extends AbstractType
             'format' => 'dd MM yyyy',
             'required' => true
             ))
-             ->add('Guardar', SubmitType::class, array('attr' => array('class' => 'btn btn-success'),
+            ->add('Guardar', SubmitType::class, array('attr' => array('class' => 'btn btn-success'),
             ))
         ;
     }

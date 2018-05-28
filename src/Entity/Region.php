@@ -115,4 +115,21 @@ class Region
 
         return $this;
     }
+
+
+     public function getArea(): ?float
+    {
+        foreach ($this->provincias as $provincia){
+            $suma = $suma + $provincia->getArea();
+        }
+            return $suma;
+    }
+    
+     public function getHabitantes(): ?int
+    {
+        foreach ($this->provincias as $provincia){
+            $suma = $suma + $provincia->getHabitantes();
+            }
+            return $suma;
+    }
 }

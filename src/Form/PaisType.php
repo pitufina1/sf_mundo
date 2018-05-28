@@ -4,11 +4,12 @@ namespace App\Form;
 
 use App\Entity\Pais;
 use App\Entity\Region;
+use App\Form\PresidenteType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 
 
 class PaisType extends AbstractType
@@ -18,11 +19,7 @@ class PaisType extends AbstractType
         $builder
             ->add('nombre')
             ->add('continente')
-            ->add('regiones',EntityType::class,array(
-                'class' => Region::class,
-                'choice_label' => function ($region) {
-                    return $region->getNombre();
-            }))
+            ->add('presidente', PresidenteType::class)
             ->add('Guardar', SubmitType::class, array('attr' => array('class' => 'btn btn-success'),
             ))
         ;

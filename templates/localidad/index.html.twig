@@ -1,3 +1,4 @@
+
 {% extends 'base.html.twig' %}
 
 {% block body %}
@@ -9,7 +10,8 @@
 		{{ localidad.nombre }} - 
 		{{ localidad.area }} - 
 		{{ localidad.habitantes }} - 
-		{{ localidad.cp }} 
+		{{ localidad.cp }} - 
+		{{ localidad.provincia.nombre }}
 	</li>
 	{% endfor %}
 </ul>
