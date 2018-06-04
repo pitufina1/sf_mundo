@@ -8,6 +8,7 @@
 	<li> 
 		{{ presidente.nombre }} - 
 		{{ presidente.fechanac|date('Y-m-d') }}
+		
 	</li>
 	{% endfor %}
 </ul><a href="{{ path('presidente_nuevo') }}"> Añadir Presidente </a>
